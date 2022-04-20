@@ -1,0 +1,167 @@
+
+@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box }
+body { 
+    min-height: 100vh; 
+    margin: 0;
+    padding: 2rem;    
+    background-color: #C2C9CF; 
+    font-family: 'Poppins', sans-serif;
+}
+h1{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.tubes { 
+    width: min(100%, 60rem);
+    margin-inline: auto;
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.tube {
+    --width: 6rem;
+    --skew: 1rem;
+    --tube-color: #fff;
+    width: var(--width);
+    aspect-ratio: 1/5;
+    border-top-left-radius: 50% var(--skew);
+    border-top-right-radius: 50% var(--skew);
+    border-bottom-left-radius: 50% var(--skew);
+    border-bottom-right-radius: 50% var(--skew);
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    position: relative;
+}
+.tube::before{
+    --blur: 4px;
+    content: '';
+    position: absolute;
+    width: calc(100% + var(--width) * 0.25);
+    z-index: -1;
+    right: var(--blur);
+    bottom: 0;
+    height: calc(var(--skew) * 2);
+    background: rgb(0 0 0 / .25);
+    border-radius: inherit;
+    filter: blur(var(--blur));
+}
+
+.tube>.cap{
+    --cap-height: calc(var(--width) * .5);
+    height: calc(var(--cap-height) + var(--skew));
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    background-color: var(--tube-color);
+    background-image: linear-gradient(to right, rgb(0 0 0 / .25), transparent 50%);
+    position: relative;
+    z-index: 2;
+}
+.tube>.cap::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: calc(var(--skew) * 2);
+    background-color: var(--tube-color);
+    background-image: linear-gradient(to left, rgb(0 0 0 / .25), transparent);
+    border-radius: 50%;
+    top: calc(var(--skew) * -1);
+}
+
+.tube>.base{
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    background-color: var(--tube-color);
+    background-image: linear-gradient(to right, rgb(0 0 0 / .25), transparent 50%);
+    position: relative;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    padding-top: calc(var(--width) * 0.1 + var(--skew));
+    padding-bottom: calc(var(--width) * .1);
+    overflow: hidden;
+}
+
+
+.tube>.base>.text{
+    color: var(--fill-color);
+    font-family: sans-serif;
+    line-height: 1;
+    font-size: calc(var(--width) * .4);
+    position: relative;
+}
+.tube>.base>.text > *{
+    position: absolute;
+    font-size: .5em;
+}
+.tube>.base>.icon{
+    width: 100%;
+    color: var(--fill-color);
+    background-color: rgb(0 0 0 / .1);
+    padding-top: calc(var(--skew) + var(--width) * .1);
+    padding-bottom: calc(var(--width) * .1);
+    display: grid;
+    place-content: center;
+    margin-top: calc(var(--skew) * -.5);
+    border-bottom-left-radius: 50% var(--skew);
+    border-bottom-right-radius: 50% var(--skew);
+    --mask-image: radial-gradient( ellipse 100% calc(var(--skew) * 2) at center top, transparent calc(50% - 1px), black calc(50% + 1px));
+    -webkit-mask-image: var(--mask-image);
+    mask-image: var(--mask-image);
+    font-size: calc(var(--width) * .25);
+}
+
+
+.tube>.fill{
+    margin-top: calc(var(--skew) * -1);
+    position: relative;
+    z-index: 1;
+    --glas-gradient:
+        linear-gradient(
+            to right,
+            rgb(0 0 0 / .25),
+            transparent 10% 15%,
+            rgb(255 255 255 / .5) 20%,
+            transparent 50% 90%,
+            rgb(0 0 0 / .125) 
+        );
+    background-image: var(--glas-gradient);
+}
+
+.tube>.fill::before{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: calc(var(--percent) * 1% + var(--skew));
+    background-color: var(--fill-color);
+    bottom: calc(var(--skew) * -1);
+    border-bottom-left-radius: 50% var(--skew);
+    border-bottom-right-radius: 50% var(--skew);
+    background-image: 
+        var(--glas-gradient),
+        radial-gradient(
+            ellipse 100% calc(var(--skew) * 2) at center calc(100% - var(--skew)), 
+            rgb(255 255 255 /.125) calc(50% - 1px), 
+            transparent 50%),
+        linear-gradient(
+            to right, 
+            rgb(0 0 0 / .25), 
+            transparent 50% 70%, 
+            rgb(0 0 0 / .25));
+}
+.tube>.fill::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: calc(var(--skew) * 2);
+    background-color: var(--fill-color);
+    border-radius: 50%;
+    bottom: calc(var(--percent) * 1% - var(--skew));
+    background-image: 
+        var(--glas-gradient),
+        linear-gradient(to left, rgb(0 0 0 / .25), transparent 50%);
+}
+
